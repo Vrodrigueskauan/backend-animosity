@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/Vrodrigueskauan/backend-animosity/issues"
   },
-  "homepage": "https://github.com/Vrodrigueskauan/backend-animosity#readme"
+  "homepage": "https://github.com/Vrodrigueskauan/backend-animosity#readme",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-session": "^1.18.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.15.3"
+  }
 }

@@ -1,3 +1,4 @@
+// src/server.js
 import express from 'express';
 import cors from 'cors';
 import connection from './conexao.js';
@@ -38,7 +39,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configurações de upload
+// Configuração do upload de arquivos
 const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 app.use('/uploads', express.static(uploadDir));
@@ -53,7 +54,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 2 * 1024 * 1024 },
+  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
   fileFilter: (req, file, cb) => {
     if (!file.mimetype.startsWith('image/')) {
       return cb(new Error('Apenas imagens são permitidas!'));
@@ -62,35 +63,31 @@ const upload = multer({
   }
 });
 
-app.use(
-  session({
-    secret: "chave_muito_segura_aqui",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+// Sessão
+app.use(session({
+  secret: "chave_muito_segura_aqui",
+  resave: false,
+  saveUninitialized: false,
+}));
 
-// Rotas (iguais às suas)
-app.get('/api/downloads', (req, res) => getDownload(req, res));
-app.put('/api/downloads', (req, res) => UpdateDownloads(req, res));
+// ROTAS DE USUÁRIO
+app.get('/usuarios', (req, res) => GetUser(req, res));
 app.get('/usuarios/verify', (req, res) => VerifyUser(req, res));
 app.post('/usuarios', (req, res) => InsertUser(req, res));
-app.get('/usuarios', (req, res) => GetUser(res));
 app.put('/api/usuarios/:id', upload.single('foto'), (req, res) => UpdateUserWithPhoto(req, res));
 app.delete('/usuarios/:id', (req, res) => DeleteUser(req, res));
 app.post('/usuarios/login', (req, res) => LoginUser(req, res));
 app.post('/usuarios/login/google', (req, res) => LoginGoogleUser(req, res));
 
+// ROTAS DE FEEDBACK
 app.post('/api/feedback', (req, res) => InsertFeed(req, res));
 app.get('/api/feedback/:id_usuario', (req, res) => GetFeed(req, res));
 app.get('/feedbacks', (req, res) => GetAllFeed(req, res));
-
-app.delete('/api/feedback/:id_usuario', async (req, res) => {
+app.delete('/api/feedback/:id_usuario', (req, res) => {
   const { id_usuario } = req.params;
   const { versao, mensagem } = req.query;
-  if (!versao || !mensagem) {
-    return res.status(400).json({ erro: "Versão e mensagem são obrigatórias!" });
-  }
+  if (!versao || !mensagem) return res.status(400).json({ erro: "Versão e mensagem são obrigatórias!" });
+
   const query = "DELETE FROM feedback WHERE id_usuario = ? AND versao = ? AND mensagem = ?";
   connection.query(query, [id_usuario, versao, mensagem], (err, result) => {
     if (err) return res.status(500).json({ erro: "Erro ao deletar feedback" });
@@ -99,6 +96,7 @@ app.delete('/api/feedback/:id_usuario', async (req, res) => {
   });
 });
 
+// ROTAS DE ATUALIZAÇÕES
 app.get('/api/atualizacoes', (req, res) => GetAtualizacoes(req, res));
 app.post('/api/atualizacoes', (req, res) => InsertAtualizacao(req, res));
 app.delete('/api/atualizacoes/:id', (req, res) => DeleteAtualizacao(req, res));
@@ -117,5 +115,9 @@ app.put('/api/atualizacoes/:id', async (req, res) => {
 });
 
 app.get('/api/versoes', (req, res) => getVersoes(req, res));
+
+// ROTAS DE DOWNLOAD
+app.get('/api/downloads', (req, res) => getDownload(req, res));
+app.put('/api/downloads', (req, res) => UpdateDownloads(req, res));
 
 export default app;

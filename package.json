@@ -1,25 +1,12 @@
 {
   "name": "backend-animosity",
   "version": "1.0.0",
-  "description": "Backend Express completo para o projeto Animosity",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vrodrigueskauan/backend-animosity.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Vrodrigueskauan/backend-animosity/issues"
-  },
-  "homepage": "https://github.com/Vrodrigueskauan/backend-animosity#readme",
   "dependencies": {
     "axios": "^1.12.2",
     "bcrypt": "^5.1.0",

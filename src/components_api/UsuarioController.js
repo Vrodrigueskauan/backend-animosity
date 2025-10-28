@@ -199,6 +199,7 @@ export async function LoginGoogleUser(req, res) {
           id: usuario.id,
           nome: usuario.nome,
           email: usuario.email,
+          adm: usuario.adm,
           foto: usuario.foto,
         },
       });

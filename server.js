@@ -15,32 +15,32 @@ import {
   LoginUser,
   LoginGoogleUser,
   VerifyUser
-} from '../components_api/UsuarioController.js';
+} from './src/components_api/UsuarioController.js';
 
 import {
   InsertFeed,
   GetFeed,
   GetAllFeed
-} from '../components_api/FeedbacksController.js';
+} from './src/components_api/FeedbacksController.js';
 
 import {
   GetAtualizacoes,
   InsertAtualizacao,
   DeleteAtualizacao,
   getVersoes
-} from '../components_api/AtualizacoesController.js';
+} from './src/components_api/AtualizacoesController.js';
 
 import {
   UpdateDownloads,
   getDownload
-} from '../components_api/DownloadController.js';
+} from './src/components_api/DownloadController.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Configuração do upload de arquivos
-const uploadDir = '../uploads';
+const uploadDir = './src/uploads';
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 app.use('/uploads', express.static(uploadDir));
 

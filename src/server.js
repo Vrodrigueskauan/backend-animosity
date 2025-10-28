@@ -71,7 +71,7 @@ app.use(session({
 }));
 
 // ROTAS DE USUÁRIO
-app.get('/usuarios', (req, res) => GetUser(req, res));
+app.get('/usuarios', (req, res) => GetUser( res));
 app.get('/usuarios/verify', (req, res) => VerifyUser(req, res));
 app.post('/usuarios', (req, res) => InsertUser(req, res));
 app.put('/api/usuarios/:id', upload.single('foto'), (req, res) => UpdateUserWithPhoto(req, res));
@@ -120,4 +120,5 @@ app.get('/api/versoes', (req, res) => getVersoes(req, res));
 app.get('/api/downloads', (req, res) => getDownload(req, res));
 app.put('/api/downloads', (req, res) => UpdateDownloads(req, res));
 
-export default app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

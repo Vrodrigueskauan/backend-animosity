@@ -74,7 +74,7 @@ app.use(session({
 app.get('/usuarios', (req, res) => GetUser( res));
 app.get('/usuarios/verify', (req, res) => VerifyUser(req, res));
 app.post('/usuarios', (req, res) => InsertUser(req, res));
-app.put('/api/usuarios/:id', upload.single('foto'), (req, res) => UpdateUserWithPhoto(req, res));
+// app.put('/api/usuarios/:id', upload.single('foto'), (req, res) => UpdateUserWithPhoto(req, res));
 app.delete('/usuarios/:id', (req, res) => DeleteUser(req, res));
 app.post('/usuarios/login', (req, res) => LoginUser(req, res));
 app.post('/usuarios/login/google', (req, res) => LoginGoogleUser(req, res));

@@ -39,29 +39,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configuração do upload de arquivos
-const uploadDir = './src/uploads';
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
-app.use('/uploads', express.static(uploadDir));
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
-  }
-});
+// const uploadDir = './src/uploads';
+// if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+// app.use('/uploads', express.static(uploadDir));
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
-  fileFilter: (req, file, cb) => {
-    if (!file.mimetype.startsWith('image/')) {
-      return cb(new Error('Apenas imagens são permitidas!'));
-    }
-    cb(null, true);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => cb(null, uploadDir),
+//   filename: (req, file, cb) => {
+//     const ext = path.extname(file.originalname);
+//     cb(null, `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
+//   }
+// });
+
+// const upload = multer({
+//   storage,
+//   limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
+//   fileFilter: (req, file, cb) => {
+//     if (!file.mimetype.startsWith('image/')) {
+//       return cb(new Error('Apenas imagens são permitidas!'));
+//     }
+//     cb(null, true);
+//   }
+// });
 
 // Sessão
 app.use(session({

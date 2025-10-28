@@ -40,7 +40,7 @@ app.use(cors());
 app.use(express.json());
 
 // Configuração do upload de arquivos
-const uploadDir = './src/uploads';
+const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 app.use('/uploads', express.static(uploadDir));
 

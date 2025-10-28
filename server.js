@@ -1,7 +1,7 @@
 // src/server.js
 import express from 'express';
 import cors from 'cors';
-import connection from './conexao.js';
+import connection from './src/conexao.js';
 import multer from 'multer';
 import fs from 'fs';
 import path from 'path';

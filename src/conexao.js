@@ -2,10 +2,10 @@ import mysql from 'mysql2';
 
 
 const connection = mysql.createConnection({
-  host: 'ballast.proxy.rlwy.net',
-  port: 16504,
+  host: 'hopper.proxy.rlwy.net',
+  port: 58989,
   user: 'root',
-  password: 'BJkdOLYUcWyoWscRnuBEgjjZwSnBSlHR',
+  password: 'cQOtrKRLbclAndfWVvFtbWOhfHieLElo',
   database: 'banco_animosidade'
 });
 
@@ -13,3 +13,4 @@ const connection = mysql.createConnection({
 
 
 export default connection;
+
